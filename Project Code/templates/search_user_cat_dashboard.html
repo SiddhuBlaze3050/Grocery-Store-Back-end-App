@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>User Dashboard</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+    <div>
+        <div>
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;"> <h4> {{customer["cm_firstname"]}}'s Dashboard </h4> <p class="text-right"> <a href="/search/{{customer.cm_id}}" class="btn btn-info">Search</a> <a href="/customer_dashboard/{{customer.cm_id}}" class="btn btn-info">Dashboard</a> <a href="/profile/{{customer.cm_id}}" class="btn btn-info" >Profile</a>  <a href="/cart/{{customer.cm_id}}" class="btn btn-info">Cart</a>  <a href="/orders_history/{{customer.cm_id}}" class="btn btn-info">Orders</a> <a href="/customer_login" class="btn btn-warning" > Logout</a> </p> </nav>
+        </div>
+        <hr width="500%" size="50" />
+        <div>     
+            {% if categories | length == 0 %}
+            <p style="color: red;"> <b> Sorry we ran out of stock for all the categories and products </b></p>
+
+            {% else %}
+                {% for category in categories %}
+                    {% if cat in category.category_name.lower() %}
+                    <table class="table table-striped">
+                        <tr>
+                            <th>{{category["category_name"]}}</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                {% if category.Products | length == 0 %}
+                                <p style="color: red;" > Sorry we ran out of stock for all the products under this category</p>
+                                {% else %}
+                                    {% for product in products %}
+                                        {% if product.ecategory_id == category.category_id %}
+                                            <table class="table table-bordered">
+                                                <tr class="thead-dark">
+                                                    <th class="col-4 text-center"> {{product["product_name"]}} </th>
+                                                    <th> {{product["price"]}}{{product["unit"]}} </th>
+                                                </tr>
+                                                <tr>
+                                                    {% if product.stock > 0 %}
+                                                    <td class="text-center"><a href="/customer_purchase/{{customer.cm_id}}/{{category.category_id}}/{{product.product_id}}" class="btn btn-primary"> Buy </a></td>
+                                                    <td><i class="bi bi-cart-dash"></i></td>
+                                                    {% else %}
+                                                    <td class="text-center"> <b style="color: red;">Out of Stock</b> </td>
+                                                    <td><i class="bi bi-cart-dash"></i></td>
+                                                    {% endif %}      
+                                                </tr>
+                                            </table>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>             
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

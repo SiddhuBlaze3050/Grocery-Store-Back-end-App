@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title> Update Products</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src='main.js'></script>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;"> <h3> Updating a product: </h3> <p> <a href="/manager_dashboard" class="btn btn-info">Dashboard</a> </p></nav>
+    </div>
+    <br>
+    <form action="/update_products/{{category_id}}/{{p1.product_id}}" method="POST" id="product-form">
+        <div class="container">
+            <div>
+                <label> <b> Category Name: </b> </label>
+                <input type="text" name="category_name" value="{{c1.category_name}}" placeholder="Category Name" size="30" required/>
+                <p style="color: red;"> Match the category name with one of the existing categories to update category </p>
+            </div>
+            <br>
+            <div>
+                <label> <b> Product Name: </b> </label>
+                <input type="text" name="product_name" value="{{p1.product_name}}" placeholder="Product Name" size="30" required/>
+            </div>
+            <br>
+            <div>
+                <label> <b> Unit: </b> </label>
+                <input type="radio" name="unit" value="Rs/kg" required/>
+                <label>Rs/kg </label>
+                <input type="radio" name="unit" value="Rs/Litre" required/>
+                <label>Rs/Litre </label>
+                <input type="radio" name="unit" value="Rs/dozen" required/>
+                <label>Rs/dozen </label>
+                <input type="radio" name="unit" value="Rs/gram" required/>
+                <label>Rs/gram </label>
+                <input type="radio" name="unit" value="Rs/unit" required/>
+                <label>Rs/unit </label>
+            </div>
+            <br>
+            <div>
+                <label> <b> Price/unit: </b>  </label>
+                <input type="number" name="price_unit" value="{{p1.price}}" placeholder="Units" size="30" required/>
+            </div>
+            <br>
+            <div>
+                <label> <b> Quantity: </b> </label>
+                <input type="number" name="quantity" value="{{p1.stock}}" placeholder="Stock" size="30" required/>
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Save" class="btn btn-primary"/>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

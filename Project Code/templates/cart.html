@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Cart</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src='main.js'></script>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;"> <h3> {{u1.cm_firstname}}'s cart </h3>  <p class="text-center"> <a href="/customer_dashboard/{{u1.cm_id}}" class="btn btn-info">Dashboard</a> </p> </nav>
+    </div>
+    <hr width="500%" size="50" />
+    <div>
+        {% if cart | length == 0 %}
+        <div>
+            <h4> Your cart is empty! </h4>   
+        </div>
+        {% else %}
+        <div>
+            <form action="/order/{{u1.cm_id}}" method="POST" id="order-form">
+                <div>
+                    <table class="table table-bordered col-8">
+                        <tr class="thead-dark text-center">
+                            <th> Category </th>
+                            <th> Product </th>
+                            <th> Unit price </th>
+                            <th> Quantity </th>
+                            <th> Total Price </th>
+                            <th> Modify </th>
+                        </tr>
+                        {% for item in cart %}
+                        <tr class="text-center">
+                            {% for category in categories %}
+                                {% if item.c_category_id == category.category_id %}
+                                    <td> {{category.category_name}}</td>
+                                {% endif%}
+                            {% endfor %}
+                            {% for product in products %}
+                                {% if item.c_product_id == product.product_id %}
+                                    <td> {{product.product_name}} </td>
+                                {% endif%}
+                            {% endfor %}
+                            <td> {{item.c_price}} </td>
+                            <td> {{item.c_quantity}} </td>
+                            <td> <b> {{item.c_totalprice}} </b> </td>
+                            <td> <a href="/cart/{{u1.cm_id}}/update/{{item.cart_id}}" class="btn btn-secondary"> Edit  </a> <a href="/cart/{{u1.cm_id}}/delete/{{item.cart_id}}" class="btn btn-secondary" > Delete </a> </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <br>
+                <div class="text-center">
+                    <h5><b>Cart Value</b>: <span class="btn btn-info btn-lg disabled">{{totalvalue}}</span> </h5>
+                    <br>
+                    <input type="submit" value="Place Order" class="btn btn-warning">
+                </div>
+            </form>
+        </div>
+        {% endif %}
+        <br>
+    </div>
+</body>
+</html>

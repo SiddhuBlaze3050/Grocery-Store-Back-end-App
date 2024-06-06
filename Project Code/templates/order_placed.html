@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Order Placed</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src='main.js'></script>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;"> <h3> Order Placed </h3> <p class="text-right"> <a href="/customer_dashboard/{{cm_id}}" class="btn btn-info">Dashboard</a> </p> </nav>
+    </div>
+    <br>
+    <div class="container">
+        <h4> Thanks for ordering! </h2>
+        <p> Your order is successfully placed and will be delivered to you as soon as possible. </p>
+    </div>
+    <br>
+    <div>
+        <div class="container">
+            <h5> Your order summary includes the following items:</h5>
+            <table class="table table-bordered col-8">
+                <tr class="thead-dark text-center">
+                    <th> Category </td>
+                    <th> Product </td>
+                    <th> Quantity </td>
+                    <th> Price </td>
+                    <th> Total Price </td>
+                </tr>
+                {% for order in orders %}
+                {% if order.o_orderno==ord_no %}
+                <tr class="text-center">
+                    {% for category in categories %}
+                        {% if order.o_category_id == category.category_id %}
+                            <td> {{category.category_name}}</td>
+                        {% endif%}
+                    {% endfor %}
+                    {% for product in products %}
+                        {% if order.o_product_id == product.product_id %}
+                            <td> {{product.product_name}} </td>
+                        {% endif%}
+                    {% endfor %}
+                    <td> {{order.o_quantity}} </td>
+                    <td> {{order.o_price}} </td>
+                    <td> <b> {{order.o_totalprice}} </b> </td>
+                </tr>
+                {% endif %}
+                {% endfor %}   
+            </table>
+        </div>
+        <br>
+        <div class="text-center">
+            <p><b>Order Value</b>: <span class="btn btn-info btn-lg disabled"> {{totalvalue}} </span> </p>
+        </div>
+    </div>
+</body>
+</html>

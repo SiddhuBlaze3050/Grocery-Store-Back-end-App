@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Manager Dashboard</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+<body>
+    <div>
+        <div>
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;"> <h4> Manager's Dashboard </h4> <p class="text-right"> <a href="/search_manager" class="btn btn-info" >Search</a>  <a href="/summary" class="btn btn-info">Summary</a>  <a href="/manager_login" class="btn btn-warning" >Logout</a> </p> </nav>
+        </div>
+        <hr width="500%" size="50" />
+        <div>     
+            {% if categories | length == 0 %}
+            <p>No categories or products created</p>
+
+            {% else %}
+                {% for category in categories %}
+                <table class="table table-striped">
+                    <tr class="thead-dark" >
+                        <th>{{category["category_name"]}}</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            {% if category.Products | length == 0 %}
+                            <p>No products created</p>
+                            {% else %}
+                                {% for product in products %}
+                                    {% if product.ecategory_id == category.category_id %}
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <th class="col-4 text-center"> {{product["product_name"]}} </th>
+                                            <th> <i class="bi bi-cart-dash-fill"></i> </th>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-center"><a href="/update_products/{{category.category_id}}/{{product.product_id}}"> <button type="button" class="btn btn-secondary"> Edit </button> </a></td>
+                                            <td><a href="/delete_products/{{category.category_id}}/{{product.product_id}}"> <button type="button" class="btn btn-secondary"> Delete </button> </a></td>
+                                        </tr>
+                                    </table>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> <a href="/add_products/{{category.category_id}}" style="width: 500px;text-align:right;" > <button type="button" class="btn btn-primary"> +Add Products </button> </a> </td>
+                    </tr>
+                    <tr>
+                        <td> <a href="/update_categories/{{category.category_id}}" > <button type="button" class="btn btn-secondary"> Edit categories </button> </a>  <a href="/delete_categories/{{category.category_id}}" > <button type="button" class="btn btn-secondary"> Delete categories </button> </a> </td>
+                    </tr>
+                </table>
+                <br>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="container">
+            <a href="/add_categories"> <button type="button" class="btn btn-primary"> +Add Categories </button> </a>
+        </div>
+    </div>
+</body>
+</html>

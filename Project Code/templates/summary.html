@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Summary</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src='main.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+            <h3> Summary </h3>
+            <p class="text-right"> <a href="/manager_dashboard" class="btn btn-info">Dashboard</a> </p>
+        </nav>
+    </div>
+    <br>
+    <div>
+        <h5 class="btn btn-info btn-lg disabled"> Categories Summary </h5>
+        <table class="table table-bordered col-8">
+            <tr class="thead-dark text-center">
+                <th> Category Name </th>
+                <th> Number of Orders </th>
+            </tr>
+            {% for cat in cat_dict%}
+            <tr class="text-center">
+                <td> {{cat[1]}} </td>
+                <td> {{cat_dict[cat]}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <br>
+    <div>
+        <h5 class="btn btn-info btn-lg disabled"> Products Summary </h5>
+        <table class="table table-bordered col-8">
+            <tr class="thead-dark text-center">
+                <th> Product Name </th>
+                <th> Number of Orders </th>
+            </tr>
+            {% for prod in prod_dict%}
+            <tr class="text-center">
+                <td> {{prod[1]}} </td>
+                <td> {{prod_dict[prod]}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <br>
+    <div>
+        <h5 class="btn btn-info btn-lg disabled"> Valuable Customers </h5>
+        <table class="table table-bordered col-8">
+            <tr class="thead-dark text-center">
+                <th> Customer First Name </th>
+                <th> Customer Last Name </th>
+                <th> Order Value </th>
+            </tr>
+            {% for cust in cust_dict%}
+            <tr class="text-center">
+                <td> {{cust[1]}} </td>
+                <td> {{cust[2]}} </td>
+                <td> {{cust_dict[cust]}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

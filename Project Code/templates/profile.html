@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>User Profile</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src='main.js'></script>
+</head>
+<body>
+    <div>
+        <nav class="navbar navbar-light" style="background-color: #e3f2fd;"> <h3> {{u1.cm_firstname}}'s Profile</h3> <a href="/customer_dashboard/{{u1.cm_id}}" class="btn btn-info">Dashboard</a> </nav>
+    </div>
+    <br>
+    <div class="container">
+        <form action="/profile/{{u1.cm_id}}" method="POST" id="profile-form">
+            <div>
+                <div class="col">
+                    <label> <b> First Name: </b> </label>
+                    <input type="text" name="firstname" value="{{u1.cm_firstname}}" size = "30" placeholder="First Name" maxlength="30" />
+                </div>
+                <br>
+                <div class="col">
+                    <label> <b> Last Name: </b></label>
+                    <input type="text" name="lastname" value="{{u1.cm_lastname}}" size = "31" placeholder="Last Name" maxlength="30" />
+                </div>
+                <br>
+                <div class="col">
+                    <label> <b> Mobile Number: </b></label>
+                    <input type="number" name="phonenumber" min="0000000000" max="9999999999" value="{{u1.cm_phonenumber}}" placeholder="Phone number" style="width: 230px;"/>
+                </div>
+                <br>
+                <div class="col">
+                    <label> <b> Username: </b> </label>
+                    <input type="text" name="username" value="{{u1.cm_username}}" size = "32" disabled/>
+                </div>
+                <br>
+                <div class="col">
+                    <label> <b> Password: </b> </label>
+                    <input type="password" name="password1" value="{{u1.cm_password}}" size = "38" placeholder="Password" maxlength="30" />
+                </div>
+                <br>
+                <div class="col">
+                    <label> <b> Repeat Password: </b> </label>
+                    <input type="password" name="password2" value="{{u1.cm_password}}" size = "30" placeholder="Repeat password" maxlength="30" />
+                </div>
+                <br>
+                <div class="container">
+                    <input type="submit" value="Save" class="btn btn-primary"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
